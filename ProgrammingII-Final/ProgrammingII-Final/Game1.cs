@@ -16,9 +16,19 @@ namespace ProgrammingII_Final
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //Player 1
+        Texture2D player1Tex;
+        Rectangle player1Pos = new Rectangle(400, 500, 39, 49);
+        Texture2D player1ShotTex;
+
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
+            Window.Title = "Space Shooty";
+            graphics.ApplyChanges();
             Content.RootDirectory = "Content";
         }
 
@@ -34,7 +44,8 @@ namespace ProgrammingII_Final
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            player1Tex = Content.Load<Texture2D>("player1");
+            player1ShotTex = Content.Load<Texture2D>("player1Shot");
         }
 
         protected override void UnloadContent()
@@ -45,7 +56,7 @@ namespace ProgrammingII_Final
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
             // TODO: Add your update logic here
@@ -57,8 +68,10 @@ namespace ProgrammingII_Final
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(player1Tex, player1Pos, Color.Wheat);
+            spriteBatch.Draw(player1Tex, player1Pos, Color.Wheat);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
