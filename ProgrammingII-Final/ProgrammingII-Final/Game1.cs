@@ -17,6 +17,7 @@ namespace ProgrammingII_Final
         SpriteBatch spriteBatch;
 
         //Player 1
+        int playerSpeed = 3;
         Texture2D player1Tex;
         Rectangle player1Pos = new Rectangle(400, 500, 39, 49);
         Vector2 player1PosVector = new Vector2(400,500);
@@ -64,6 +65,8 @@ namespace ProgrammingII_Final
                 this.Exit();
             currentState = Keyboard.GetState();
             
+            if (currentState.IsKeyDown(Keys.A)){ player1Pos.X = player1Pos.X - playerSpeed;} 
+
             if (currentState.IsKeyDown(Keys.Space))
             {
                 player1Shot.Add(player1PosVector);
@@ -85,10 +88,14 @@ namespace ProgrammingII_Final
 
         private void drawShots()
         {
-            int i = player1ShotTotal;
-            if (i > 0)
+            if (player1ShotTotal == 0) //Should I draw shots?
             {
-                spriteBatch.Draw(player1ShotTex, new Vector2(400, 400), Color.White);
+                int i = player1ShotTotal; //Shots counter
+                while (i > 0) // Drawing shots
+                {
+                    i++;
+                    spriteBatch.Draw(player1ShotTex, player1Shot[i], Color.White);
+                }
             }
         }
     }
