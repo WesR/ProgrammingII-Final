@@ -19,7 +19,11 @@ namespace ProgrammingII_Final
         //Player 1
         Texture2D player1Tex;
         Rectangle player1Pos = new Rectangle(400, 500, 39, 49);
+        Vector2 player1PosVector = new Vector2(400,500);
         Texture2D player1ShotTex;
+        List<Vector2> player1Shot = new List<Vector2>();
+        int player1ShotTotal = 0;
+        KeyboardState currentState;
 
         
         public Game1()
@@ -58,21 +62,34 @@ namespace ProgrammingII_Final
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
-
-            // TODO: Add your update logic here
-
+            currentState = Keyboard.GetState();
+            
+            if (currentState.IsKeyDown(Keys.Space))
+            {
+                player1Shot.Add(player1PosVector);
+                player1ShotTotal++;
+            }
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            
             spriteBatch.Begin();
             spriteBatch.Draw(player1Tex, player1Pos, Color.Wheat);
-            spriteBatch.Draw(player1Tex, player1Pos, Color.Wheat);
+            drawShots();
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void drawShots()
+        {
+            int i = player1ShotTotal;
+            if (i > 0)
+            {
+                spriteBatch.Draw(player1ShotTex, new Vector2(400, 400), Color.White);
+            }
         }
     }
 }
