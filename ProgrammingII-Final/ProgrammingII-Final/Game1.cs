@@ -65,7 +65,8 @@ namespace ProgrammingII_Final
                 this.Exit();
             currentState = Keyboard.GetState();
             
-            if (currentState.IsKeyDown(Keys.A)){ player1Pos.X = player1Pos.X - playerSpeed;} 
+            if (currentState.IsKeyDown(Keys.A) && player1Pos.X > 3){ player1Pos.X = player1Pos.X - playerSpeed;}
+            if (currentState.IsKeyDown(Keys.D) && player1Pos.X < 760) { player1Pos.X = player1Pos.X + playerSpeed; } 
 
             if (currentState.IsKeyDown(Keys.Space))
             {
