@@ -1,4 +1,6 @@
 ProgrammingII-Final
 ===================
 
-Programmin final for Programming II
+Programming final for Programming II
+
+This Project is not likely to be finished.
